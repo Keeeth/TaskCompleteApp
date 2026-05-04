@@ -1,0 +1,15 @@
+/Users/keithpontlitz/Documents/Projects/Keeeth.github.io/Keeeth.github.io-1/TaskCompleteApp/bin/Debug/net10.0/TaskCompleteApp
+/Users/keithpontlitz/Documents/Projects/Keeeth.github.io/Keeeth.github.io-1/TaskCompleteApp/bin/Debug/net10.0/TaskCompleteApp.deps.json
+/Users/keithpontlitz/Documents/Projects/Keeeth.github.io/Keeeth.github.io-1/TaskCompleteApp/bin/Debug/net10.0/TaskCompleteApp.runtimeconfig.json
+/Users/keithpontlitz/Documents/Projects/Keeeth.github.io/Keeeth.github.io-1/TaskCompleteApp/bin/Debug/net10.0/TaskCompleteApp.dll
+/Users/keithpontlitz/Documents/Projects/Keeeth.github.io/Keeeth.github.io-1/TaskCompleteApp/bin/Debug/net10.0/TaskCompleteApp.pdb
+/Users/keithpontlitz/Documents/Projects/Keeeth.github.io/Keeeth.github.io-1/TaskCompleteApp/obj/Debug/net10.0/TaskCompleteApp.GeneratedMSBuildEditorConfig.editorconfig
+/Users/keithpontlitz/Documents/Projects/Keeeth.github.io/Keeeth.github.io-1/TaskCompleteApp/obj/Debug/net10.0/TaskCompleteApp.AssemblyInfoInputs.cache
+/Users/keithpontlitz/Documents/Projects/Keeeth.github.io/Keeeth.github.io-1/TaskCompleteApp/obj/Debug/net10.0/TaskCompleteApp.AssemblyInfo.cs
+/Users/keithpontlitz/Documents/Projects/Keeeth.github.io/Keeeth.github.io-1/TaskCompleteApp/obj/Debug/net10.0/TaskCompleteApp.csproj.CoreCompileInputs.cache
+/Users/keithpontlitz/Documents/Projects/Keeeth.github.io/Keeeth.github.io-1/TaskCompleteApp/obj/Debug/net10.0/TaskCompleteApp.sourcelink.json
+/Users/keithpontlitz/Documents/Projects/Keeeth.github.io/Keeeth.github.io-1/TaskCompleteApp/obj/Debug/net10.0/TaskCompleteApp.dll
+/Users/keithpontlitz/Documents/Projects/Keeeth.github.io/Keeeth.github.io-1/TaskCompleteApp/obj/Debug/net10.0/refint/TaskCompleteApp.dll
+/Users/keithpontlitz/Documents/Projects/Keeeth.github.io/Keeeth.github.io-1/TaskCompleteApp/obj/Debug/net10.0/TaskCompleteApp.pdb
+/Users/keithpontlitz/Documents/Projects/Keeeth.github.io/Keeeth.github.io-1/TaskCompleteApp/obj/Debug/net10.0/TaskCompleteApp.genruntimeconfig.cache
+/Users/keithpontlitz/Documents/Projects/Keeeth.github.io/Keeeth.github.io-1/TaskCompleteApp/obj/Debug/net10.0/ref/TaskCompleteApp.dll
