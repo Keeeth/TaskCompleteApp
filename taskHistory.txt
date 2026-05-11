@@ -5,8 +5,11 @@
 05/02/2026   | 3 modules Coursera Course           | Completed
 05/03/2026   | buy aged garlic Vitamin Shoppe!     | Completed
 05/03/2026   | Boxing workout Lifetime Fitness!    | Completed
-05/03/2026   | Test1                               | Pending
-05/03/2026   | test2                               | Pending
-05/03/2026   | test3                               | Pending
-05/04/2026   | Test3                               | Completed
-05/04/2026   | test4!                              | Pending
+05/04/2026   | Create Repository Github            | Completed
+05/04/2026   | dotnet run program codespaces       | Completed
+05/06/2026   | Project Submission                  | Completed
+05/06/2026   | Run Lake Elkhorn                    | Completed 
+5/08/2026      Tek System paperwork                | Completed
+05/09/2026   | enter job contacts MWE.             | Completed
+05/09/2026   | Do weekly certification Beacon      | Completed
+05/09/2026   | 3 modules Coursera                  | Pending

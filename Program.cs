@@ -4,12 +4,16 @@
     {
         // This is your permanent database file name
         static string filePath = "taskHistory.txt";
+        
+        
         static List<string> taskHistory = new List<string>();
 
         static void Main(string[] args)
         {
             // 1. Pull existing data from the file so the app "remembers"
-            LoadFromDatabase();
+        LoadFromDatabase();
+    
+
 
             bool running = true;
             while (running)
@@ -18,6 +22,7 @@
                 Console.WriteLine("1. Add New Task");
                 Console.WriteLine("2. View History Table");
                 Console.WriteLine("3. Exit");
+                Console.WriteLine("4. Update Task Status");
                 Console.Write("Select an option: ");
 
                 string choice = Console.ReadLine() ?? "";
@@ -52,8 +57,35 @@
                         Console.WriteLine("Closing TaskComplete. Great job today, Keith!");
                         running = false;
                         break;
-                        default:
-                        Console.WriteLine("Invalid selection. Please try again.");
+                      case "4":
+                        
+    Console.WriteLine("\n--- SELECT A TASK BY INDEX ---");
+    for (int i = 0; i < taskHistory.Count; i++)
+    {
+        Console.WriteLine($"[{i}] {taskHistory[i]}");
+    }
+
+    Console.Write("\nEnter index to update: ");
+    if (int.TryParse(Console.ReadLine(), out int index) && index >= 0 && index < taskHistory.Count)
+    {
+        // This is the logic that swaps the status
+        if (taskHistory[index].Contains("Pending"))
+        {
+            taskHistory[index] = taskHistory[index].Replace("Pending", "Completed");
+            
+            // PERSISTENCE: This saves the change back to your hard drive
+            File.WriteAllLines(filePath, taskHistory); 
+            
+            Console.WriteLine("Dopamine Hit! Task marked as Completed.");
+        }
+        else {
+            Console.WriteLine("Task is already completed or formatted differently.");
+        }
+    }
+        break; 
+
+              default:
+                Console.WriteLine("Invalid selection. Please try again.");
                         break;
                 }
             }
@@ -114,7 +146,7 @@
                     }
                     else
                     {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
                     }
 
                     // 3. Print the Status and Reset
