@@ -66,9 +66,12 @@
     }
 
     Console.Write("\nEnter index to update: ");
-    if (int.TryParse(Console.ReadLine(), out int index) && index >= 0 && index < taskHistory.Count)
+    if (int.TryParse(Console.ReadLine(), out int userInput))    
     {
-        // This is the logic that swaps the status
+        int index = userInput - 1;
+        if(index >=0 && index < taskHistory.Count)
+        {
+        
         if (taskHistory[index].Contains("Pending"))
         {
             taskHistory[index] = taskHistory[index].Replace("Pending", "Completed");
@@ -76,10 +79,18 @@
             // PERSISTENCE: This saves the change back to your hard drive
             File.WriteAllLines(filePath, taskHistory); 
             
-            Console.WriteLine("Dopamine Hit! Task marked as Completed.");
+            Console.WriteLine("Dopamine Hit! Task marked as Completed.");           
         }
+        // 2. If it's not Pending, check if it's currently Completed
+             else if (taskHistory[index].Contains("Completed"))
+        {
+           taskHistory[index] = taskHistory[index].Replace("Completed", "Pending");
+           Console.WriteLine("Task rolled back to Pending!");
+              // PERSISTENCE: This saves the change back to your hard drive
+                File.WriteAllLines(filePath, taskHistory);
+       }
         else {
-            Console.WriteLine("Task is already completed or formatted differently.");
+            Console.WriteLine("Invalid Selection number , Please try again!");
         }
     }
         break; 
