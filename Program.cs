@@ -1,19 +1,19 @@
-﻿namespace TaskCompleteApp
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+
+namespace TaskCompleteApp
 {
     class Program
     {
         // This is your permanent database file name
         static string filePath = "taskHistory.txt";
-        
-        
         static List<string> taskHistory = new List<string>();
 
         static void Main(string[] args)
         {
             // 1. Pull existing data from the file so the app "remembers"
-        LoadFromDatabase();
-    
-
+            LoadFromDatabase();
 
             bool running = true;
             while (running)
@@ -32,71 +32,80 @@
                     case "1":
                         Console.Write("Enter task (e.g., 2 job applications): ");
                         string task = Console.ReadLine() ?? "Unnamed Task";
-                       // Manually set colors for the "Selection" labels
-                          Console.ForegroundColor = ConsoleColor.Green;
-                          Console.Write("Status: (1) Completed "); 
-                          Console.ResetColor(); // Reset so the comma/next text isn't green
-                          Console.ForegroundColor = ConsoleColor.Yellow;
-                          Console.WriteLine("(2) Pending"); 
-                          Console.ResetColor();
-                           Console.Write("Select status (1 or 2): ");
-                          string statusChoice = Console.ReadLine() ?? "";
+                        
+                        // Manually set colors for the "Selection" labels
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write("Status: (1) Completed "); 
+                        Console.ResetColor(); // Reset so the comma/next text isn't green
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("(2) Pending"); 
+                        Console.ResetColor();
+                        Console.Write("Select status (1 or 2): ");
+                        string statusChoice = Console.ReadLine() ?? "";
+                        
                         // This logic assigns the status based on your choice
-                          string status = (statusChoice == "2") ? "Pending" : "Completed";    
-                           LogTask(task, status);
+                        string status = (statusChoice == "2") ? "Pending" : "Completed";    
+                        LogTask(task, status);
 
-                    // Apply color to the final confirmation message using a condition
-                     Console.ForegroundColor = (status == "Completed") ? ConsoleColor.Green : ConsoleColor.Yellow;
-                     Console.WriteLine($"Task added as {status} and saved to history!");
-                     Console.ResetColor(); 
-                     break;
-                        case "2":
+                        // Apply color to the final confirmation message using a condition
+                        Console.ForegroundColor = (status == "Completed") ? ConsoleColor.Green : ConsoleColor.Yellow;
+                        Console.WriteLine($"Task added as {status} and saved to history!");
+                        Console.ResetColor(); 
+                        break;
+
+                    case "2":
                         DisplayHistoryTable();
                         break;
-                        case "3":
+
+                    case "3":
                         Console.WriteLine("Closing TaskComplete. Great job today, Keith!");
                         running = false;
                         break;
-                      case "4":
-                        
-    Console.WriteLine("\n--- SELECT A TASK BY INDEX ---");
-    for (int i = 0; i < taskHistory.Count; i++)
-    {
-        Console.WriteLine($"[{i}] {taskHistory[i]}");
-    }
 
-    Console.Write("\nEnter index to update: ");
-    if (int.TryParse(Console.ReadLine(), out int userInput))    
-    {
-        int index = userInput - 1;
-        if(index >=0 && index < taskHistory.Count)
-        {
-        
-        if (taskHistory[index].Contains("Pending"))
-        {
-            taskHistory[index] = taskHistory[index].Replace("Pending", "Completed");
-            
-            // PERSISTENCE: This saves the change back to your hard drive
-            File.WriteAllLines(filePath, taskHistory); 
-            
-            Console.WriteLine("Dopamine Hit! Task marked as Completed.");           
-        }
-        // 2. If it's not Pending, check if it's currently Completed
-             else if (taskHistory[index].Contains("Completed"))
-        {
-           taskHistory[index] = taskHistory[index].Replace("Completed", "Pending");
-           Console.WriteLine("Task rolled back to Pending!");
-              // PERSISTENCE: This saves the change back to your hard drive
-                File.WriteAllLines(filePath, taskHistory);
-       }
-        else {
-            Console.WriteLine("Invalid Selection number , Please try again!");
-        }
-    }
-        break; 
+                    case "4":
+                        Console.WriteLine("\n--- SELECT A TASK BY INDEX ---");
+                        for (int i = 0; i < taskHistory.Count; i++)
+                        {
+                            // Displaying human-friendly 1-based index numbering
+                            Console.WriteLine($"[{i + 1}] {taskHistory[i]}");
+                        }
 
-              default:
-                Console.WriteLine("Invalid selection. Please try again.");
+                        Console.Write("\nEnter index to update: ");
+                        if (int.TryParse(Console.ReadLine(), out int userInput))    
+                        {
+                            // Translating human 1-based count back down to 0-based index
+                            int index = userInput - 1;
+                            
+                            if (index >= 0 && index < taskHistory.Count)
+                            {
+                                if (taskHistory[index].Contains("Pending"))
+                                {
+                                    taskHistory[index] = taskHistory[index].Replace("Pending", "Completed");
+                                    
+                                    // PERSISTENCE: This saves the change back to your hard drive
+                                    File.WriteAllLines(filePath, taskHistory); 
+                                    
+                                    Console.WriteLine("Dopamine Hit! Task marked as Completed.");           
+                                }
+                                // 2. If it's not Pending, check if it's currently Completed
+                                else if (taskHistory[index].Contains("Completed"))
+                                {
+                                    taskHistory[index] = taskHistory[index].Replace("Completed", "Pending");
+                                    Console.WriteLine("Task rolled back to Pending!");
+                                    
+                                    // PERSISTENCE: This saves the change back to your hard drive
+                                    File.WriteAllLines(filePath, taskHistory);
+                                }
+                            }
+                            else 
+                            {
+                                Console.WriteLine("Invalid Selection number, Please try again!");
+                            }
+                        }
+                        break; 
+
+                    default:
+                        Console.WriteLine("Invalid selection. Please try again.");
                         break;
                 }
             }
@@ -132,43 +141,41 @@
             {
                 Console.WriteLine("No history found.");
             }
-        else
-        {
-            foreach (var entry in taskHistory)
+            else
+            {
+                foreach (var entry in taskHistory)
                 {
                     // Because your history is currently just List<string>, 
                     // we have to split the string back into parts to check the color.
                     var parts = entry.Split('|');
-                    if (parts.Length >=3)
+                    if (parts.Length >= 3)
                     {
-                        
-                    
-                    string date = parts[0].Trim();
-                    string name = parts[1].Trim();
-                    string status = parts[2].Trim();
+                        string date = parts[0].Trim();
+                        string name = parts[1].Trim();
+                        string status = parts[2].Trim();
 
-                    // 1. Align the text
-                    Console.Write($"{date,-12} | {name,-35} | ");
+                        // 1. Align the text
+                        Console.Write($"{date,-12} | {name,-35} | ");
 
-                    // 2. The Conditional Color Method
-                    if (status == "Completed")
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
+                        // 2. The Conditional Color Method
+                        if (status == "Completed")
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                        }
+
+                        // 3. Print the Status and Reset
+                        Console.Write(status);
+                        Console.ResetColor();
+
+                        // 4. Move to the next line
+                        Console.WriteLine();
                     }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                    }
-
-                    // 3. Print the Status and Reset
-                    Console.Write(status);
-                    Console.ResetColor();
-
-                    // 4. Move to the next line
-                    Console.WriteLine();
                 }
             }
         }
     }
-   }
 }
